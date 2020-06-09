@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --config ./webpack.config.js",
-    "build": "webpack --config ./webpack.config.js --env.production",
-    "server": "webpack-dev-server --config ./webpack.config.js --debug",
-    "zip": "webpack --config ./webpack.config.js --env.production --zip"
+    "dev": "webpack --config ./webpack.config.dev.js",
+    "server": "webpack-dev-server --config ./webpack.config.dev.js --env.debug",
+    "build": "webpack --config ./webpack.config.pro.js",
+    "zip": "webpack --config ./webpack.config.pro.js --env.zip"
   },
   "keywords": [],
   "author": "",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
   "sideEffects": [
     "*.css",
     "*.scss",
