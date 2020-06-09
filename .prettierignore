@@ -1,0 +1,16 @@
+.idea/
+.gitkeep
+.gitignore
+.prettierignore
+dist/
+node_modules/
+*.bat
+*.eot
+*.gif
+*.jpg
+*.otf
+*.png
+*.ttf
+*.woff
+*.woff2
+*.zip

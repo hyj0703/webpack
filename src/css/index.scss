@@ -1,0 +1,25 @@
+body {
+    #root {
+        width:200px;
+        height:200px;
+        margin:40px;
+        border:3px solid black;
+        transform:translate3d(0,-1px,0)
+    }
+    .pic {
+        width:65px;
+        height:65px;
+        background:url(../sprite/img/guessulike_cart.png)
+    }
+    .img {
+        width:82px;
+        height:82px;
+        background:url(../sprite/img/pic_logo.png)
+    }
+    .abbbbb {
+        width:50px
+    }
+    span {
+        height:4000px
+    }
+}
