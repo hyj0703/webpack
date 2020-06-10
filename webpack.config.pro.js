@@ -49,7 +49,7 @@ const proConfig = (zip) => ({
           //options额外的配置，比如资源名称
           options: {
             //placeholder 占位符 [name]老资源模块的名称 [ext]老资源模块的后缀
-            name: '[name]_[hash].[ext]',
+            name: '[name]_[hash:6].[ext]',
             //打包后存放的位置
             outputPath: 'images/',
           },
@@ -118,7 +118,7 @@ const proConfig = (zip) => ({
         '----------这里填入申请到的API key--------',
         '----------这里填入申请到的API key--------',
       ],
-      ext: ['png', 'jpeg', 'jpg', 'gif'],
+      ext: ['png', 'jpeg', 'jpg'],
     }),
     zip
       ? new FilemanagerWebpackPlugin({
@@ -161,8 +161,8 @@ const proConfig = (zip) => ({
 })
 
 module.exports = (env) => {
+  //env为在指令中配置的参数，--env.debug
   let zip = null
-  if (env && env.zip) zip = env.zip
-  console.log('zip', zip)
+  if (env && env.zip) zip = env.zip //如配置了--env.zip参数，则打一个zip的压缩包
   return proConfig(zip)
 }

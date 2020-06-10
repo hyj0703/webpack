@@ -45,7 +45,7 @@ const devConfig = (debug) => ({
           //options额外的配置，比如资源名称
           options: {
             //placeholder 占位符 [name]老资源模块的名称 [ext]老资源模块的后缀
-            name: '[name]_[hash].[ext]',
+            name: '[name]_[hash:6].[ext]',
             //打包后存放的位置
             outputPath: 'images/',
           },
@@ -113,7 +113,8 @@ const devConfig = (debug) => ({
 })
 
 module.exports = (env) => {
+  //env为在指令中配置的参数，--env.debug，
   let debug = null
-  if (env && env.debug) debug = env.debug
+  if (env && env.debug) debug = env.debug //如配置了--env.debug参数，则开启vConsolePlugin
   return devConfig(debug)
 }

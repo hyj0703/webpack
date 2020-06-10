@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import ReactDom from 'react-dom'
 
 import './css/index.scss'
-// import a from './a.js'
+import a from './a.js'
 
 console.log('hello webpack')
 class App extends PureComponent {
@@ -12,6 +12,8 @@ class App extends PureComponent {
         hello world
         <div className="img"></div>
         <div className="pic"></div>
+        <div className="img2"></div>
+        <div className="pic2"></div>
       </div>
     )
   }
