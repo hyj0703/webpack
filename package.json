@@ -1,5 +1,5 @@
 {
-  "name": "myWebpack",
+  "name": "mywebpack",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -39,6 +39,7 @@
     "express": "^4.17.1",
     "file-loader": "^6.0.0",
     "filemanager-webpack-plugin": "^2.0.5",
+    "fs": "0.0.1-security",
     "glob-all": "^3.2.1",
     "hard-source-webpack-plugin": "^0.13.1",
     "html-webpack-plugin": "^4.3.0",
