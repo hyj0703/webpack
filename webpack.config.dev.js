@@ -82,7 +82,6 @@ const devConfig = (debug) => ({
     open: true,
     port: 8081,
     hot: true,
-    hotOnly: true, //即便HMR不生效，浏览器也不自动刷新，就开启hotOnly
     proxy: {
       '/api': {
         target: 'http://localhost:9092',
