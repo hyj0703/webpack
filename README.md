@@ -1,0 +1,38 @@
+- 1、webpack基础 
+- 1.1、webpack开发环境搭建 
+- 1.2、webpack配置核心
+- 1.3、开发及生产环境分离
+- 1.4、处理静态资源
+- 2、webpack热门插件
+- 2.1、 HtmlWebpackPlugin
+- 2.2 、clean-webpack-plugin
+- 3、提升开发效率的利器
+- 3.1、WebpackDevServer
+- 3.2、本地mock数据，解决跨域
+- 3.3 、Babel处理ES6
+- 3.4 、css文件的处理
+- 4、webpack性能优化---优化开发体验
+- 4.1、优化loader配置
+- 4.2、优化resolve.modules配置
+- 4.3、优化resolve.alias配置
+- 4.4、优化resolve.extensions配置
+- 4.5、优化文件监听的性能
+- 4.6、HMR 热模块替换
+- 4.7、sourceMap
+- 4.8、HardSourceWebpackPlugin
+- 4.9、调试工具
+- 5、webpack性能优化---优化输出质量
+- 5.1、借助MiniCssExtractPlugin完成抽离css
+- 5.2、压缩css
+- 5.3、压缩HTML
+- 5.4、tree Shaking
+- 5.5、代码分割 code Splitting
+- 5.6、图片压缩
+- 5.7、压缩打包
+- 5.8、雪碧图
+- 5.9、px转rem，适配不同屏幕大小
+- 6、开发环境的配置代码
+- 7、生产环境的配置代码
+- 8、项目的github地址
+
+详细说明请查看 http://jelly.jd.com/article/5ee390707c53070156dd4078
