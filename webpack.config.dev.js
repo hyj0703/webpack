@@ -92,10 +92,10 @@ const devConfig = (debug) => ({
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HardSourceWebpackPlugin(), //缓存文件
-    new vConsolePlugin({
-      enable: debug,
-      filter: ['base'],
-    }),
+    // new vConsolePlugin({
+    //   enable: debug,
+    //   filter: ['base'],
+    // }),
     new htmlWebpackPlugin({
       title: 'My App', //标题
       filename: 'index.html', // 输出的文件名，默认是index.html

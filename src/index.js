@@ -1,22 +1,23 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import ReactDom from 'react-dom'
+import { Provider } from 'react-redux'
+import store from './store/index'
+import { Router, Switch, Route } from 'react-router-dom'
+import { createHashHistory } from 'history'
 
-import './css/index.scss'
-import a from './a.js'
+import Page1 from './components/page1'
+import Page2 from './components/page2'
 
-console.log('hello webpack')
-class App extends PureComponent {
-  render() {
-    return (
-      <div>
-        hello world
-        <div className="img"></div>
-        <div className="pic"></div>
-        <div className="img2"></div>
-        <div className="pic2"></div>
-      </div>
-    )
-  }
-}
-
-ReactDom.render(<App />, document.getElementById('root'))
+ReactDom.render(
+  <Provider store={store}>
+    <Router history={createHashHistory()}>
+      <React.Fragment>
+        <Switch>
+          <Route exact path="/" component={Page1} />
+          <Route path="/page2" component={Page2} />
+        </Switch>
+      </React.Fragment>
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+)
