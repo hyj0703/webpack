@@ -1,23 +1,27 @@
-import React from 'react'
-import ReactDom from 'react-dom'
-import { Provider } from 'react-redux'
-import store from './store/index'
-import { Router, Switch, Route } from 'react-router-dom'
-import { createHashHistory } from 'history'
+// import React from 'react'
+// import ReactDom from 'react-dom'
+import React from './myReact/index.js'
 
-import Page1 from './components/page1'
-import Page2 from './components/page2'
+function App(props) {
+  const [count, setCount] = React.useState(1)
+  const [title, setTitle] = React.useState(1)
+  return (
+    <div>
+      <h3>{props.title}</h3>
+      <h2>{count}</h2>
+      <button onClick={() => setCount(count + 1)}>click</button>
+      <h2>{title}</h2>
+      <button onClick={() => setTitle(title + 1)}>click</button>
+      <div id="demo">
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+        </ul>
+      </div>
+    </div>
+  )
+}
 
-ReactDom.render(
-  <Provider store={store}>
-    <Router history={createHashHistory()}>
-      <React.Fragment>
-        <Switch>
-          <Route exact path="/" component={Page1} />
-          <Route path="/page2" component={Page2} />
-        </Switch>
-      </React.Fragment>
-    </Router>
-  </Provider>,
-  document.getElementById('root')
-)
+React.render(<App title="大前端" />, document.getElementById('root'))

@@ -1,30 +1,22 @@
 import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { withPromise } from '../utils/reducerAndSaga'
+// import { connect } from 'react-redux'
+import { connect } from '../kReactRedux'
 
 class Page2 extends PureComponent {
   render() {
-    const { history } = this.props
+    const { counter, add } = this.props
+    console.log('props', add)
     return (
       <div>
-        App2
-        <button
-          onClick={() => {
-            history.push('/')
-          }}>
-          点击跳转
-        </button>
+        App{counter}
+        <button onClick={add}>add</button>
       </div>
     )
   }
 }
 export default connect(
-  (state) => state,
-  withPromise((dispatch) => {
-    return {
-      add() {
-        dispatch({ type: 'bbb' })
-      },
-    }
-  })
+  //mapStateToProps
+  (state) => ({ counter: state }),
+  //mapDispatchToProps
+  { add: () => ({ type: 'add' }) }
 )(Page2)

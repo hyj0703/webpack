@@ -8,6 +8,15 @@ body {
     background-color: rgb(203, 222, 250);
     transform: translate3d(0, -1px, 0);
   }
+  .box {
+    padding: 30px;
+  }
+  .border {
+    border: 1px solid red;
+    padding: 5px;
+    margin: 25px 0;
+    font-size: 40px;
+  }
   .pic {
     width: 65px;
     height: 65px;

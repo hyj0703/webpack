@@ -75,27 +75,27 @@ const devConfig = (debug) => ({
         './node_modules/react-dom/umd/react-dom.production.min.js'
       ),
     },
-    extensions: ['.js'],
+    extensions: ['.js', '.json', '.jsx', '.ts'],
   },
   devServer: {
     contentBase: './dist',
-    open: true,
+    // open: true,
     port: 8081,
     hot: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:9092',
-        changeOrigin: true,
-      },
-    },
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://localhost:9092',
+    //     changeOrigin: true,
+    //   },
+    // },
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HardSourceWebpackPlugin(), //缓存文件
-    // new vConsolePlugin({
-    //   enable: debug,
-    //   filter: ['base'],
-    // }),
+    new vConsolePlugin({
+      enable: debug,
+      filter: ['base'],
+    }),
     new htmlWebpackPlugin({
       title: 'My App', //标题
       filename: 'index.html', // 输出的文件名，默认是index.html
