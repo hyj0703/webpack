@@ -20,7 +20,7 @@ const devConfig = (debug) => ({
     rules: [
       {
         test: /\.(css|scss)$/,
-        include: path.resolve(__dirname, './src'),
+        // include: path.resolve(__dirname, './src'),
         //loader是有顺序的，从后往前
         use: [
           'style-loader', //在页面插入css样式
@@ -31,14 +31,14 @@ const devConfig = (debug) => ({
       },
       {
         test: /\.jsx?$/, //适配js和jsx
-        include: path.resolve(__dirname, './src'),
+        // include: path.resolve(__dirname, './src'),
         use: {
           loader: 'babel-loader',
         },
       },
       {
         test: /\.(png|jpe?g|git)$/,
-        include: path.resolve(__dirname, './src'),
+        // include: path.resolve(__dirname, './src'),
         //use使用一个loader可以用对象，字符串，两个loader需要用数组
         use: {
           loader: 'file-loader',
@@ -53,7 +53,7 @@ const devConfig = (debug) => ({
       },
       {
         test: /\.(eot|ttf|woff|woff2|svg)$/,
-        include: path.resolve(__dirname, './src'),
+        // include: path.resolve(__dirname, './src'),
         use: 'file-loader',
       },
     ],
@@ -90,8 +90,8 @@ const devConfig = (debug) => ({
     // },
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new HardSourceWebpackPlugin(), //缓存文件
+    // new webpack.HotModuleReplacementPlugin(),
+    // new HardSourceWebpackPlugin(), //缓存文件
     new vConsolePlugin({
       enable: debug,
       filter: ['base'],

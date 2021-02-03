@@ -23,11 +23,17 @@ const proConfig = (zip) => ({
     rules: [
       {
         test: /\.(css|scss)$/,
-        include: path.resolve(__dirname, './src'),
+        // include: path.resolve(__dirname, './src'),
         //loader是有顺序的，从后往前
         use: [
           // 'style-loader',//在页面插入css样式
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../',
+            },
+          },
+
           'css-loader', // 抽取css样式
           'postcss-loader', // 样式前缀自动补全
           'sass-loader', // sass当做css技术栈
@@ -35,14 +41,14 @@ const proConfig = (zip) => ({
       },
       {
         test: /\.jsx?$/, //适配js和jsx
-        include: path.resolve(__dirname, './src'),
+        // include: path.resolve(__dirname, './src'),
         use: {
           loader: 'babel-loader',
         },
       },
       {
         test: /\.(png|jpe?g|git)$/,
-        include: path.resolve(__dirname, './src'),
+        // include: path.resolve(__dirname, './src'),
         //use使用一个loader可以用对象，字符串，两个loader需要用数组
         use: {
           loader: 'file-loader',
@@ -57,7 +63,7 @@ const proConfig = (zip) => ({
       },
       {
         test: /\.(eot|ttf|woff|woff2|svg)$/,
-        include: path.resolve(__dirname, './src'),
+        // include: path.resolve(__dirname, './src'),
         use: 'file-loader',
       },
     ],
@@ -74,7 +80,7 @@ const proConfig = (zip) => ({
         './node_modules/react-dom/umd/react-dom.production.min.js'
       ),
     },
-    extensions: ['.js'],
+    extensions: ['.js', '.json', '.jsx', '.ts'],
   },
   optimization: {
     usedExports: true, //哪些导出的模块被使用了，再做打包
@@ -91,14 +97,14 @@ const proConfig = (zip) => ({
     },
   },
   plugins: [
-    new PurifyCss({
-      // 清除无用css
-      paths: glob.sync([
-        // 要做css Tree Shaking的路径文件
-        path.resolve(__dirname, './src/*.html'),
-        path.resolve(__dirname, './src/*.js'),
-      ]),
-    }),
+    // new PurifyCss({
+    //   // 清除无用css
+    //   paths: glob.sync([
+    //     // 要做css Tree Shaking的路径文件
+    //     path.resolve(__dirname, './src/*.html'),
+    //     path.resolve(__dirname, './src/*.js'),
+    //   ]),
+    // }),
     new OptimizeCssAssetsPlugin({
       //压缩css
       cssProcessor: require('cssnano'), //引入cssnano配置压缩选项
@@ -112,11 +118,8 @@ const proConfig = (zip) => ({
     }),
     new tinyPngWebpackPlugin({
       key: [
-        '----------这里填入申请到的API key--------',
-        '----------这里填入申请到的API key--------',
-        '----------这里填入申请到的API key--------',
-        '----------这里填入申请到的API key--------',
-        '----------这里填入申请到的API key--------',
+        // '----------这里填入自己申请到的API key--------',
+        'vyvmKBpKsPH31zlkS0rKT2vfhVrKf6gc',
       ],
       ext: ['png', 'jpeg', 'jpg'],
     }),

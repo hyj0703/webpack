@@ -46,7 +46,7 @@ module.exports = {
             .cloneAfter({
               type: 'decl',
               prop: 'background-image',
-              value: `url(./${spriteUrl})`,
+              value: `url(../${spriteUrl})`,
             })
             .cloneAfter({
               prop: 'background-position',
