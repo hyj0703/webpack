@@ -35,4 +35,4 @@
 - 7、生产环境的配置代码
 - 8、项目的github地址
 
-详细说明请查看 http://jelly.jd.com/article/5ee390707c53070156dd4078
+详细说明请查看 https://blog.csdn.net/h_1_h/article/details/106548413
