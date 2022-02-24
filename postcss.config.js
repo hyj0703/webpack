@@ -1,7 +1,7 @@
 const path = require('path')
 const postcssPresetEnv = require('postcss-preset-env')
 const sprites = require('postcss-sprites')
-const px2rem = require('postcss-px2rem')
+const px2rem = require('postcss-pxtorem')
 const postcss = require('postcss')
 
 module.exports = {

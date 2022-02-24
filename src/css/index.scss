@@ -17,30 +17,7 @@ body {
     margin: 25px 0;
     font-size: 40px;
   }
-  .pic {
-    width: 65px;
-    height: 65px;
-    background: url(../sprite/img1/a.png);
-  }
-  .img {
-    width: 82px;
-    height: 82px;
-    background: url(../sprite/img1/b.png);
-  }
-  .pic2 {
-    width: 65px;
-    height: 65px;
-    background: url(../sprite/img2/c.png);
-  }
-  .img2 {
-    width: 82px;
-    height: 82px;
-    background: url(../sprite/img2/d.png);
-  }
-  .abbbbb {
-    width: 50px;
-  }
-  span {
-    height: 4000px;
+  .demo_class {
+    background: url('../../sprite/img1/a.png');
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './demo.scss'
+import '../css/index.scss'
 
 export default class DemoHtml extends Component {
   render() {

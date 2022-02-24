@@ -1,23 +1,14 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const PurifyCss = require('purifycss-webpack')
-const glob = require('glob-all')
-const tinyPngWebpackPlugin = require('tinypng-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const FilemanagerWebpackPlugin = require('filemanager-webpack-plugin')
 const htmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { merge } = require('webpack-merge')
+const configBase = require('./webpack.config.base.js')
 
 const proConfig = (zip) => ({
-  entry: {
-    base: ['core-js/stable', 'regenerator-runtime/runtime'],
-    main: [path.resolve(__dirname, './src/index.js')],
-  },
-  output: {
-    filename: 'js/[name]_[hash:6].js',
-    path: path.resolve(__dirname, './build'),
-  },
-  // mode:"development",
   mode: 'production',
   module: {
     rules: [
@@ -39,51 +30,13 @@ const proConfig = (zip) => ({
           'sass-loader', // sass当做css技术栈
         ],
       },
-      {
-        test: /\.jsx?$/, //适配js和jsx
-        // include: path.resolve(__dirname, './src'),
-        use: {
-          loader: 'babel-loader',
-        },
-      },
-      {
-        test: /\.(png|jpe?g|git)$/,
-        // include: path.resolve(__dirname, './src'),
-        //use使用一个loader可以用对象，字符串，两个loader需要用数组
-        use: {
-          loader: 'file-loader',
-          //options额外的配置，比如资源名称
-          options: {
-            //placeholder 占位符 [name]老资源模块的名称 [ext]老资源模块的后缀
-            name: '[name]_[hash:6].[ext]',
-            //打包后存放的位置
-            outputPath: 'images/',
-          },
-        },
-      },
-      {
-        test: /\.(eot|ttf|woff|woff2|svg)$/,
-        // include: path.resolve(__dirname, './src'),
-        use: 'file-loader',
-      },
     ],
   },
-  resolve: {
-    modules: [path.resolve(__dirname, './node_modules')],
-    alias: {
-      react: path.resolve(
-        __dirname,
-        './node_modules/react/umd/react.production.min.js'
-      ),
-      'react-dom': path.resolve(
-        __dirname,
-        './node_modules/react-dom/umd/react-dom.production.min.js'
-      ),
-    },
-    extensions: ['.js', '.json', '.jsx', '.ts'],
-  },
   optimization: {
-    usedExports: true, //哪些导出的模块被使用了，再做打包
+    usedExports: true, //只导出被使用的模块
+    minimize: true, //启动压缩
+    concatenateModules: true, //模块合并
+    sideEffects: true, //开启副作用，去掉没使用的代码
     splitChunks: {
       chunks: 'all', //所有的chunks代码公共部分分离出来成为一个单独的文件
       cacheGroups: {
@@ -95,50 +48,47 @@ const proConfig = (zip) => ({
         },
       },
     },
+    minimizer: [
+      new TerserPlugin(),
+      new CssMinimizerPlugin(),
+      new ImageMinimizerPlugin({
+        //压缩图片
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminMinify,
+          options: {
+            plugins: [
+              ['gifsicle', { interlaced: true }],
+              ['jpegtran', { progressive: true }],
+              ['optipng', { optimizationLevel: 5 }],
+            ],
+          },
+        },
+      }),
+    ],
   },
   plugins: [
-    // new PurifyCss({
-    //   // 清除无用css
-    //   paths: glob.sync([
-    //     // 要做css Tree Shaking的路径文件
-    //     path.resolve(__dirname, './src/*.html'),
-    //     path.resolve(__dirname, './src/*.js'),
-    //   ]),
-    // }),
-    new OptimizeCssAssetsPlugin({
-      //压缩css
-      cssProcessor: require('cssnano'), //引入cssnano配置压缩选项
-      cssProcessorOptions: {
-        discardComments: { removeAll: true },
-      },
-    }),
     new MiniCssExtractPlugin({
       //提取css为单独文件
       filename: 'css/[name]_[contenthash:6].css',
     }),
-    new tinyPngWebpackPlugin({
-      key: [
-        // '----------这里填入自己申请到的API key--------',
-        'vyvmKBpKsPH31zlkS0rKT2vfhVrKf6gc',
-      ],
-      ext: ['png', 'jpeg', 'jpg'],
-    }),
     zip
       ? new FilemanagerWebpackPlugin({
-          onEnd: {
-            copy: [
-              {
-                source: path.resolve(__dirname, './build'),
-                destination: path.resolve(__dirname, './tmp_for_zip/dist'),
-              },
-            ],
-            archive: [
-              {
-                source: path.resolve(__dirname, './tmp_for_zip'),
-                destination: path.resolve(__dirname, './dist.zip'),
-              },
-            ],
-            delete: [path.resolve(__dirname, './tmp_for_zip')],
+          events: {
+            onEnd: {
+              copy: [
+                {
+                  source: path.resolve(__dirname, './dist'),
+                  destination: path.resolve(__dirname, './tmp_for_zip/dist'),
+                },
+              ],
+              archive: [
+                {
+                  source: path.resolve(__dirname, './tmp_for_zip'),
+                  destination: path.resolve(__dirname, './dist.zip'),
+                },
+              ],
+              delete: [path.resolve(__dirname, './tmp_for_zip')],
+            },
           },
         })
       : () => {},
@@ -153,13 +103,6 @@ const proConfig = (zip) => ({
         minifyCss: true, //压缩内联css
       },
     }), //插件配置
-    new CleanWebpackPlugin({
-      //打包之前清理一次
-      cleanOnceBeforeBuildPatterns: [
-        path.resolve(__dirname, './dist'),
-        path.resolve(__dirname, './build'),
-      ],
-    }),
   ],
 })
 
@@ -167,5 +110,5 @@ module.exports = (env) => {
   //env为在指令中配置的参数，--env.debug
   let zip = null
   if (env && env.zip) zip = env.zip //如配置了--env.zip参数，则打一个zip的压缩包
-  return proConfig(zip)
+  return merge(configBase, proConfig(zip))
 }
