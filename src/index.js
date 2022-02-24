@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import DemoHtml from './components/demo/DemoHtml'
+import DemoHtml from './components/DemoHtml'
 
 function App(props) {
   return <DemoHtml />
